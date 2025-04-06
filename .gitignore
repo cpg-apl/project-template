@@ -1,0 +1,4 @@
+# Add files to be ignored by git
+
+## Keep this to ignore macOS system files
+.DS_Store
