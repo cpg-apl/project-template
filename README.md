@@ -8,7 +8,7 @@ This repository is a project template for all CPG-APL projects. Included are the
 
 This README template is sourced from the [Social Science Data Editors](https://social-science-data-editors.github.io/template_README/). A special thanks to authors Lars Vilhuber, Miklós Koren, Joan Llull, Marie Connolly, Peter Morrow for this resource.
 
-<---------------------------------------------------{Delete me and everything above}--------------------------------------------------->
+<--------------------------------------{Delete me and everything above}-------------------------------------->
 
 # README for "`TITLE OF PAPER`" 
 
