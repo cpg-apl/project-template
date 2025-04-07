@@ -1,39 +1,63 @@
-# main.R
+# main.R 
 
 # ====================================
 # Instructions
 # ====================================
 
-# This script runs all the other scripts in the /code/ directory.
-# There should be ONE main.R file, and it should be in cpg-###/code/.
-
-# First, set working directory.
-# Then, adjust the calls below to your program list.
+# This script sequentially runs all scripts in the /code directory.
+# It also logs the output to a timestamped log file.
+# Place this file in: cpg-###/code/main.R
 
 # ====================================
 # Set Working Directory
 # ====================================
-# This should be of the form:
-# rootdir <- "cpg-###"
-rootdir <- ""
+# Set working directory to project root (assumes you're in /code/)
+rootdir <- normalizePath(file.path(getwd(), ".."))
+setwd(rootdir)
 
 # ====================================
-# Script 1: (e.g., Load Data)
+# Initialize Logging
 # ====================================
-# 01_load.R - Load raw data and initial setup
-cat("Running 01_load.R: Loading data...\n") # Optional message for tracking
-source("code/01_load.R")
+timestamp <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
+log_file <- file.path("code", paste0("runlog_", timestamp, ".txt"))
+log_con <- file(log_file, open = "wt")
+sink(log_con, split = TRUE)  # Split = TRUE prints to console AND log file
+cat("🔧 Log started at:", timestamp, "\n")
+cat("Working directory:", getwd(), "\n\n")
 
 # ====================================
-# Script 2: (e.g., Clean Data)
+# Define Scripts to Run
 # ====================================
-# 02_clean.R - Clean and preprocess data
-cat("Running 02_clean.R: Cleaning data...\n") # Optional message for tracking
-source("code/02_clean.R")
+scripts <- c(
+  "01_load.R",   
+  "02_clean.R",  
+  "03_merge.R",  
+  "04_analysis.R",
+  "05_tables.R", 
+  "06_figures.R" 
+)
 
-# ... Repeat for all scripts
+# ====================================
+# Execute Scripts
+# ====================================
+for (script in scripts) {
+  script_path <- file.path("code", script)
+  if (file.exists(script_path)) {
+    cat(paste0("▶️ Running ", script, "...\n"))
+    tryCatch({
+      source(script_path)
+      cat(paste0("✅ Finished ", script, "\n\n"))
+    }, error = function(e) {
+      cat(paste0("❌ Error in ", script, ": ", e$message, "\n\n"))
+    })
+  } else {
+    cat(paste0("⚠️ Script ", script_path, " not found. Skipping.\n\n"))
+  }
+}
 
 # ====================================
-# Final Output and Summary
+# Close Log
 # ====================================
-cat("All scripts executed successfully.\n")
+cat("🏁 All scripts processed. Log saved to:", log_file, "\n")
+sink()
+close(log_con)
