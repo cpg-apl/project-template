@@ -1,0 +1,109 @@
+---
+title: "Project Title"
+author: "Your Name"
+date: "2025-04-06"
+format: html
+---
+
+```{r, setup, message=FALSE}
+
+# This setup block loads necessary packages
+library(tidyverse)
+
+```
+
+> **NOTE:** Quarto documents are for exploration and testing; for the final deposit, use `.R` scripts. There should be **ONE** `main.R` script that calls all subsequent `.R` scripts.
+
+# Introduction
+
+Provide a brief introduction to your analysis or research question. Explain what you will explore in this document, including the data and methods used.
+
+For example:
+
+- What is the main question or hypothesis you're testing?
+- Why is this research important?
+- What datasets are being used?
+
+# Load Data
+
+First, we load the required libraries and data.
+
+```{r}
+
+# Load the data
+data <- read.csv("../data/raw/your_data.csv")
+head(data)
+
+```
+
+# Data Cleaning and Preprocessing
+
+In this section, we'll clean and preprocess the data to prepare it for analysis.
+
+```{r}
+
+# Clean the data: removing missing values, renaming columns, etc.
+data_clean <- data %>%
+  filter(!is.na(variable)) %>%
+  rename(new_variable = old_variable)
+
+# Check cleaned data
+head(data_clean)
+
+```
+
+# Exploratory Data Analysis (EDA)
+
+Here, we explore the dataset by visualizing and summarizing key patterns.
+
+## Summary Statistics
+
+```{r}
+
+# Summary statistics
+summary(data_clean)
+
+```
+
+## Visualizing the Data
+
+```{r}
+
+# Visualize the distribution of a variable
+ggplot(data_clean, aes(x = new_variable)) +
+  geom_histogram(binwidth = 1) +
+  labs(title = "Distribution of New Variable")
+
+```
+
+# Model Prototyping
+
+In this section, we'll build a simple model to test our hypothesis.
+
+```{r}
+
+# Example: Linear regression model
+model <- lm(dependent_variable ~ independent_variable, data = data_clean)
+
+# View model summary
+summary(model)
+
+```
+
+# Results
+
+Here, summarize the results of your analysis or modeling.
+
+For example:
+
+- What did the exploratory data analysis show?
+- What insights were gained from the model?
+
+# Conclusion
+
+Wrap up the analysis, summarize key findings, and outline any next steps.
+
+- Discuss whether your hypothesis was supported or rejected.
+- What are the implications of the results?
+- Are there any limitations to your analysis?
+

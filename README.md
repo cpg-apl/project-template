@@ -1,10 +1,74 @@
 # CPG-APL `project-template` README
 
-This repository is a project template for all CPG-APL projects. Included are the necessary directories, documentation templates, and manuscript templates for tidy, reproducible social science research.
+This repository is a project template for all CPG-APL projects. Included are the directories, documentation, and templates necessary for tidy, reproducible social science research.
 
-> **INSTRUCTIONS TO LEADS:** Please clone this repository and rename it to your assigned case number (e.g., `cpg-123`). Then, remove everything above and including the dashed lines and replace `TITLE OF PAPER` with the title of paper (please delete the backticks (``) around `TITLE OF PAPER` as well). Then follow the instructions provided in the README template.
+## Directory Structure
+
+APL's generic directory structure is as follows:
+
+```
+cpg-123/
+├── data/
+│   ├── raw/
+│   ├── clean/
+│   └── final/
+├── code/
+├── article/
+└── README.md
+```
+
+### Directory Details
+
+#### `cpg-123/`
+
+Top-level directory for your assigned case, containing all its files. Each project will have a unique number (e.g., `cpg-123`) used to identify and organize materials.
+
+#### `/data/`
+
+Contains datasets (e.g., `.csv`, `.xlsx`, `.rds`, `.json`, etc.) used throughout the research workflow. It is subdivided into three stages:
+
+- **`/raw/`**  
+  Contains **unprocessed, original source data** as received from the provider (e.g., downloaded datasets, scraped data, or exports from public databases).  
+  - Files here should be **read-only**—never edited directly.  
+  - Example: `acs_2020_full.csv`, `api_pull_2022.json`, `survey_raw.xlsx`
+
+- **`/clean/`**  
+  Contains data that has been **cleaned, filtered, or transformed** for analysis.  
+  - Typically includes steps like fixing missing values, renaming variables, or reshaping tables.  
+  - All files should be **produced via scripts** in the `/code/` folder.  
+  - Example: `acs_cleaned.csv`, `survey_renamed.rds`
+
+- **`/final/`**  
+  Contains **analysis-ready datasets**, often merged, collapsed, or otherwise pre-processed for modeling or visualization.  
+  - These are the datasets that go directly into analysis scripts.  
+  - Example: `model_input_panel.csv`, `table1_data.rds`
+
+#### `/code/`
+
+Contains all data preparation and analysis scripts and notebooks, including cleaning scripts, exploratory analysis, modeling, and visualizations.  
+- Suggested organization: prefix scripts by order or purpose (e.g., `01_clean.R`, `02_merge.R`, `03_model.qmd`).
+
+#### `/article/`
+
+Holds manuscript drafts, figures, tables, bibliographies, and submission materials.  
+- Common formats include `.docx`, `.tex`, `.bib`, and image files.
+
+
+## Next Steps:
+
+> **INSTRUCTIONS TO LEADS:** Please clone this repository and rename it to your assigned case number (e.g., `cpg-123`). 
 > 
-> An example title could be: # README for "The Effects of X on Y"
+> To clone, open a terminal at your desired destination on your local machine (e.g., on the `CPG/` folder on your laptop's Desktop) and paste:
+>
+> ```
+> git clone https://github.com/cpg-apl/project-template.git
+> ```
+> 
+> Once cloned, open this `README.md` file and remove everything above *and including* the dashed lines. 
+> 
+> Then, replace `TITLE OF PAPER` with the title of your paper (please also delete the backticks (``) around `TITLE OF PAPER`). Example: README for "The Effects of X on Y"
+> 
+> Then follow the instructions provided in the README template.
 
 This README template is sourced from the [Social Science Data Editors](https://social-science-data-editors.github.io/template_README/). A special thanks to authors Lars Vilhuber, Miklós Koren, Joan Llull, Marie Connolly, Peter Morrow for this resource.
 
